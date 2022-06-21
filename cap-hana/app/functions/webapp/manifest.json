@@ -63,6 +63,15 @@
         "sap.fe.templates": {}
       }
     },
+    "extends": {
+        "extensions": {
+            "sap.ui.controllerExtensions": {
+                "sap.fe.templates.ListReport.ListReportController": {
+                    "controllerName": "prot.functions.custom.ListReportExtController"
+                }
+            }
+        }
+    },
     "contentDensities": {
       "compact": true,
       "cozy": true
@@ -74,6 +83,13 @@
           "bundleName": "prot.functions.i18n.i18n"
         }
       },
+      "appModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {
+            "defaultBindingMode": "TwoWay"
+        },
+        "preload": true
+    },
       "": {
         "dataSource": "mainService",
         "preload": true,
