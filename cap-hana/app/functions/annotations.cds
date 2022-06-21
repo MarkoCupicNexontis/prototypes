@@ -9,11 +9,7 @@ annotate service.Functions with @(
         {
             $Type : 'UI.DataField',
             Value : description,
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : documentation,
-        },
+        }
     ]
 );
 annotate service.Functions with @(
@@ -27,11 +23,7 @@ annotate service.Functions with @(
             {
                 $Type : 'UI.DataField',
                 Value : description,
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : documentation,
-            },
+            }
         ],
     },
     UI.Facets : [
