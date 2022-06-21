@@ -6,6 +6,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@azure/storage-blob": "^12.10.0",
     "@sap/cds": "^5",
     "express": "^4",
     "hdb": "^0.18.3"
