@@ -11,10 +11,13 @@
         "hdb": "^0.18.3"
     },
     "devDependencies": {
+        "@sap/ux-specification": "^1.100.4",
         "sqlite3": "^5.0.2"
     },
     "scripts": {
-        "start": "cds run"
+        "start": "cds run",
+        "watch-functions": "cds watch --open functions/webapp/index.html?sap-ui-xx-viewCache=false",
+        "undeploy": "cf undeploy cap-hana --delete-services --delete-service-keys"
     },
     "eslintConfig": {
         "extends": "eslint:recommended",
@@ -61,5 +64,8 @@
                 "kind": "hana"
             }
         }
-    }
+    },
+    "sapux": [
+        "app/functions"
+    ]
 }
