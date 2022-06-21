@@ -1,13 +1,14 @@
 namespace func;
 
 entity Functions {
-    key ID                     : UUID        @odata.Type : 'Edm.String'  @UI.Hidden;
-        type                   : FileType;
-        description            : String      @title      : 'Description';
-        documentation          : LargeString @title      : 'Documentation';
-        allocation             : Association to one Allocations;
-        derivation             : Association to one Derivations;
-        modelTable             : Association to one ModelTables;
+    key ID            : UUID        @odata.Type : 'Edm.String'  @UI.Hidden;
+        type          : FileType;
+        description   : String      @title      : 'Description';
+        documentation : LargeString @title      : 'Documentation';
+        sequence      : Integer     @title      : 'Sequence';
+        allocation    : Association to one Allocations;
+        derivation    : Association to one Derivations;
+        modelTable    : Association to one ModelTables;
 }
 
 type FileType @(assert.range) : String @title : 'Type' enum {
