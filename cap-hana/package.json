@@ -42,13 +42,24 @@
         }
     },
     "cds": {
-        "requires": {
-            "db": {
-                "kind": "sql"
-            }
+        "build": {
+            "tasks": [
+                {
+                    "for": "hana",
+                    "dest": "../db"
+                },
+                {
+                    "for": "node-cf"
+                }
+            ]
         },
         "hana": {
             "deploy-format": "hdbtable"
+        },
+        "requires": {
+            "db": {
+                "kind": "hana"
+            }
         }
     }
 }
