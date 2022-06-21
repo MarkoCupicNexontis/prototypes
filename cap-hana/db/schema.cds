@@ -1,3 +1,5 @@
+namespace func;
+
 entity Functions {
     key ID                     : UUID        @odata.Type : 'Edm.String'  @UI.Hidden;
         type                   : FileType;
