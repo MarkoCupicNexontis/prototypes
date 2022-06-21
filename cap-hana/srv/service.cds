@@ -8,7 +8,14 @@ using {
 @path : 'service/functions'
 service FunctionService {
     @odata.draft.enabled
-    entity Functions   as projection on functions;
+    entity Functions   as projection on functions order by
+        sequence asc
+    actions {
+        @title : 'Up'
+        action up() returns Functions;
+        @title : 'Down'
+        action down() returns Functions;
+    };
 
     @odata.draft.enabled
     entity Allocations as projection on allocations;
