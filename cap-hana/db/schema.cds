@@ -1,13 +1,27 @@
 namespace func;
 
 entity Functions {
-    key ID                     : UUID        @odata.Type : 'Edm.String'  @UI.Hidden;
-        type                   : FileType;
-        description            : String      @title      : 'Description';
-        documentation          : LargeString @title      : 'Documentation';
-        allocation             : Association to one Allocations;
-        derivation             : Association to one Derivations;
-        modelTable             : Association to one ModelTables;
+    key ID            : UUID        @odata.Type : 'Edm.String'  @UI.Hidden;
+        type          : FileType;
+        description   : String      @title      : 'Description';
+        documentation : LargeString @title      : 'Documentation';
+        allocation    : Association to one Allocations;
+        derivation    : Association to one Derivations;
+        modelTable    : Association to one ModelTables;
+        VALID_FROM    : Timestamp default '1900-01-01 00:00:00' not null;
+        VALID_TO      : Timestamp default '9999-12-31 23:59:59' not null;
+}
+
+entity Functions_History {
+    ID            : UUID not null;
+    type          : FileType;
+    description   : String;
+    documentation : LargeString;
+    allocation    : Association to one Allocations;
+    derivation    : Association to one Derivations;
+    modelTable    : Association to one ModelTables;
+    VALID_FROM    : Timestamp;
+    VALID_TO      : Timestamp;
 }
 
 type FileType @(assert.range) : String @title : 'Type' enum {
