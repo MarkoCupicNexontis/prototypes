@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="Test" class="sapUiResponsivePadding--header sapUiResponsivePadding--footer" contentWidth="25%">
+		<content>
+			<l:Grid defaultSpan="L12 M12 S12">
+				<l:content>
+					<f:SimpleForm minWidth="300">
+						<f:content>
+							<Label text="Test" required="true"/>
+							<ComboBox placeholder="Choose one" id="chooseID" selectionChange="onChoose" items="{appModel>/items}" 	value="{appModel>/pickedItem}">
+								<core:Item key="{appModel>ITEM}" text="{appModel>ITEM}"/>
+							</ComboBox>
+						</f:content>
+					</f:SimpleForm>
+				</l:content>
+			</l:Grid>
+		</content>
+		<beginButton>
+			<Button text="Close" press="closeFragment"/>
+		</beginButton>
+		<endButton>
+			<Button id="saveBtn" enabled="false" text="Save" type="Accept" icon="sap-icon://save" press="onSave"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
