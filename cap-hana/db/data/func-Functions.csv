@@ -1,0 +1,5 @@
+ID;TYPE;DESCRIPTION;DIRECTORY_ID;sequence
+1;MT;Model Table 1;FILE1;1
+2;MT;Model Table 2;FILE1;2
+3;DE;Derivation;FILE1;3
+4;AL;Allocation;FILE1;4
