@@ -121,7 +121,8 @@
                     "route": "FunctionsObjectPage"
                   }
                 }
-              }
+              },
+              "initialLoad": "Enabled"
             }
           }
         },
