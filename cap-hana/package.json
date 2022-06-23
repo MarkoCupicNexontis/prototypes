@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@sap/ux-specification": "^1.100.4",
+    "cds-launchpad-plugin": "^1.0.5",
     "sqlite3": "^5.0.2"
   },
   "scripts": {
