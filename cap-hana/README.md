@@ -15,7 +15,9 @@ File or Folder | Purpose
 #Prerequisits
 
 Runing Hana instance
+
 Open a new terminal and run `cf login --sso`
+
 Login with one time code
 
 ## Dependency instalation
@@ -29,6 +31,8 @@ Open a new terminal and run
   `hana-cli createModule`
   
   `cds add hana`
+  
+## Start up the project
 
   `cds build`
   
