@@ -1,163 +1,196 @@
 {
-  "_version": "1.40.0",
-  "sap.app": {
-    "id": "prot.functions",
-    "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "0.0.1"
-    },
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "resources": "resources.json",
-    "sourceTemplate": {
-      "id": "@sap-ux/fiori-elements-writer:lrop",
-      "version": "0.3.6",
-      "toolsId": "1670310d-82d5-493e-8151-cb39848dca21"
-    },
-    "dataSources": {
-      "mainService": {
-        "uri": "/service/functions/",
-        "type": "OData",
-        "settings": {
-          "annotations": [
-            "annotation"
-          ],
-          "localUri": "localService/metadata.xml",
-          "odataVersion": "4.0"
-        }
-      },
-      "annotation": {
-        "type": "ODataAnnotation",
-        "uri": "annotations/annotation.xml",
-        "settings": {
-          "localUri": "annotations/annotation.xml"
-        }
-      }
-    }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    }
-  },
-  "sap.ui5": {
-    "flexEnabled": true,
-    "dependencies": {
-      "minUI5Version": "1.102.1",
-      "libs": {
-        "sap.m": {},
-        "sap.ui.core": {},
-        "sap.ushell": {},
-        "sap.fe.templates": {}
-      }
-    },
-    "extends": {
-        "extensions": {
-            "sap.ui.controllerExtensions": {
-                "sap.fe.templates.ListReport.ListReportController": {
-                    "controllerName": "prot.functions.custom.ListReportExtController"
+    "_version": "1.40.0",
+    "sap.app": {
+        "id": "prot.functions",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap-ux/fiori-elements-writer:lrop",
+            "version": "0.3.6",
+            "toolsId": "1670310d-82d5-493e-8151-cb39848dca21"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/service/functions/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "functions-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "functions",
+                    "action": "display",
+                    "title": "{{appTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
                 }
             }
         }
     },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "prot.functions.i18n.i18n"
-        }
-      },
-      "appModel": {
-        "type": "sap.ui.model.json.JSONModel",
-        "settings": {
-            "defaultBindingMode": "TwoWay"
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
         },
-        "preload": true
-    },
-      "": {
-        "dataSource": "mainService",
-        "preload": true,
-        "settings": {
-          "synchronizationMode": "None",
-          "operationMode": "Server",
-          "autoExpandSelect": true,
-          "earlyRequests": true
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
         }
-      },
-      "@i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/i18n.properties"
-      }
     },
-    "resources": {
-      "css": []
-    },
-    "routing": {
-      "config": {},
-      "routes": [
-        {
-          "pattern": ":?query:",
-          "name": "FunctionsList",
-          "target": "FunctionsList"
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.102.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
         },
-        {
-          "pattern": "Functions({key}):?query:",
-          "name": "FunctionsObjectPage",
-          "target": "FunctionsObjectPage"
-        }
-      ],
-      "targets": {
-        "FunctionsList": {
-          "type": "Component",
-          "id": "FunctionsList",
-          "name": "sap.fe.templates.ListReport",
-          "options": {
-            "settings": {
-              "entitySet": "Functions",
-              "variantManagement": "Page",
-              "navigation": {
-                "Functions": {
-                  "detail": {
-                    "route": "FunctionsObjectPage"
-                  }
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {
+                    "sap.fe.templates.ListReport.ListReportController": {
+                        "controllerName": "prot.functions.custom.ListReportExtController"
+                    }
                 }
-              },
-              "initialLoad": "Enabled"
             }
-          }
         },
-        "FunctionsObjectPage": {
-          "type": "Component",
-          "id": "FunctionsObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "entitySet": "Functions"
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "prot.functions.i18n.i18n"
+                }
+            },
+            "appModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                },
+                "preload": true
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
             }
-          }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "FunctionsList",
+                    "target": "FunctionsList"
+                },
+                {
+                    "pattern": "Functions({key}):?query:",
+                    "name": "FunctionsObjectPage",
+                    "target": "FunctionsObjectPage"
+                }
+            ],
+            "targets": {
+                "FunctionsList": {
+                    "type": "Component",
+                    "id": "FunctionsList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Functions",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "Functions": {
+                                    "detail": {
+                                        "route": "FunctionsObjectPage"
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled",
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "counterID": {
+                                            "id": "counterID",
+                                            "text": "User's online: 0",
+                                            "press": ".extension.prot.functions.custom.ListReportExtController.onUserCount",
+                                            "requiresSelection": false
+                                        },
+                                        "resetID": {
+                                            "id": "resetID",
+                                            "text": "Reset",
+                                            "press": ".extension.prot.functions.custom.ListReportExtController.resetCount",
+                                            "requiresSelection": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "FunctionsObjectPage": {
+                    "type": "Component",
+                    "id": "FunctionsObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "Functions"
+                        }
+                    }
+                }
+            }
         }
-      }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
     }
-  },
-  "sap.fiori": {
-    "registrationIds": [],
-    "archeType": "transactional"
-  }
 }

@@ -23,11 +23,12 @@ sap.ui.define(["sap/ui/core/mvc/ControllerExtension", "sap/m/MessageToast","sap/
 
         getUserCount: function () {
             var that = this
-            $.ajax({
+            jQuery.ajax({
                 method: "GET",
-                url: "/service/functions/incrementUserCount()",
+                url: "/service/functions/counterRefresh()",
                 success: function (oResponse) {
-                     that.userCountBTN.setText(`User's online: ${oResponse.value.toString()}`);
+                  
+                     that.userCountBTN.setText(`User's online: ${oResponse.value.count.toString()}`);
 
                 },
                 error: function (oResponse, res) {
@@ -36,6 +37,23 @@ sap.ui.define(["sap/ui/core/mvc/ControllerExtension", "sap/m/MessageToast","sap/
                 }
             });
         },
+        resetCount: function () {
+            var that = this
+            $.ajax({
+                method: "POST",
+                contentType: "application/json",
+                url: "/service/functions/resetCounter",
+                success: function (oResponse) {
+                     
+
+                },
+                error: function (oResponse, res) {
+
+                    console.log(oResponse, res)
+                }
+            });
+        },
+        
 
         onUpload: function (oEvent) {
             this._pDialogFileUpload = undefined;
@@ -72,10 +90,10 @@ sap.ui.define(["sap/ui/core/mvc/ControllerExtension", "sap/m/MessageToast","sap/
 
         },
         intervalService: function () {
-            // var that = this;
-            // this.intervalHandle = setInterval(function () {
-            //     that.getUserCount();
-            // }, 5000);
+            var that = this;
+            this.intervalHandle = setInterval(function () {
+                that.getUserCount();
+            }, 2000);
         },
         onUserCount: function() {
             if (!this.testPopover) {
@@ -108,32 +126,82 @@ sap.ui.define(["sap/ui/core/mvc/ControllerExtension", "sap/m/MessageToast","sap/
 
             
         },
+        onDecrese: function () {
+            
+            $.ajax({
+                method: "POST",
+                contentType: "application/json",
+                url: "/service/functions/decrease",
+                success: function (oResponse) {
+                    console.log("Success",oResponse)
+
+                },
+                error: function (oResponse, res) {
+
+                    console.log(oResponse, res)
+                }
+            });
+        },
+        onIncrese: function() {
+        
+            $.ajax({
+                method: "POST",
+                contentType: "application/json",
+                url: "/service/functions/increase",
+                success: function (oResponse) {
+                     
+
+                },
+                error: function (oResponse, res) {
+
+                    console.log(oResponse, res)
+                }
+            });
+        },
 
 
         // this section allows to extend lifecycle hooks or override public methods of the base controller
         override: {
             onInit: function () {
-                this.getUserCount();
-                this.intervalService();
+                var that=this;
+                that.getUserCount();
+                that.intervalService();
                 this.objItems = [{
                     "ITEM" : "Item1"
                 },{
                     "ITEM" : "Item2"
                 }]
-
+                // this.oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
+                // console.log(that.oStorage.get('onInit'))
+                // if (that.oStorage.get('onInit') == null) {
+                  
+                //     that.oStorage.put('onInit', true);
+                //     console.log(that.oStorage.get('onInit'))
+                // }
+                
+               
 
             },
             onBeforeRendering: function () {
-
+                var that= this;
+                // if (that.oStorage.get('onInit')) {
+                //     console.log(that.oStorage.get('onInit'))
+                //     that.onIncrese();
+                //     that.oStorage.put('onInit', false);
+                // }
+                that.onIncrese();
                 this.oAppModel = this.getView().getModel("appModel");
                 this.oDataModel = this.getView().getModel();
                 this.oAppModel.setProperty("/items", jQuery.extend(true, [], this.objItems));
 
             },
             onAfterRendering: function () {
-                this.userCountBTN = this.getView().byId("functions::FunctionsList--fe::CustomAction::userCountID");
-                this.userCountBTN.setEnabled(true);
-                console.log(this.oAppModel.getProperty("/items"))
+                this.userCountBTN = this.getView().byId("prot.functions::FunctionsList--fe::CustomAction::counterID");
+                 this.userCountBTN.setEnabled(true);
+            },
+            onExit : function () {
+                var that= this;
+                that.onDecrese();
             }
 
 
