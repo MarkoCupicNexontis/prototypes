@@ -22,12 +22,17 @@ Login with one time code
 
 Open a new terminal and run 
   `npm install`
+  
   `npm install -g hana-cli`
+  
   `hana-cli createModule`
+  
   `cds add hana`
 
   `cds build`
+  
   `cds deploy --to hana --auto-undeploy`
+  
   `cds watch`
 
 
