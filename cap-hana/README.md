@@ -12,12 +12,23 @@ File or Folder | Purpose
 `package.json` | project metadata and configuration
 `readme.md` | this getting started guide
 
+#Prerequisits
 
-## Next Steps
+Runing Hana instance
+Open a new terminal and run `cf login --sso`
+Login with one time code
 
-- Open a new terminal and run `cds watch` 
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
+## Dependency instalation
+
+Open a new terminal and run 
+  `npm install`
+  `npm install -g hana-cli`
+  `hana-cli createModule`
+  `cds add hana`
+
+  `cds build`
+  `cds deploy --to hana --auto-undeploy`
+  `cds watch`
 
 
 ## Learn More
