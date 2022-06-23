@@ -20,7 +20,8 @@ Login with one time code
 
 ## Dependency instalation
 
-Open a new terminal and run 
+Open a new terminal and run
+
   `npm install`
   
   `npm install -g hana-cli`
