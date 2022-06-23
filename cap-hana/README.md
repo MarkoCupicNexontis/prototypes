@@ -34,6 +34,8 @@ Open a new terminal and run
   
 ## Start up the project
 
+In the terminal
+
   `cds build`
   
   `cds deploy --to hana --auto-undeploy`
