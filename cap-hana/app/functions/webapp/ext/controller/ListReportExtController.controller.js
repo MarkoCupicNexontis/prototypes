@@ -42,12 +42,12 @@ sap.ui.define(["sap/ui/core/mvc/ControllerExtension", "sap/m/MessageToast", "sap
 
             },
             onAfterRendering: function () {
-                        var that= this
+                var that = this
                 // var oContextBinding = that.oDataModel.bindContext("/Functions(ID='1',IsActiveEntity=true)");
                 // oContextBinding.requestObject("description").then(function (sNote) {
                 //         oContextBinding.getBoundContext().setProperty("description", "asdasdasda");
-                       
-    
+
+
                 // });
                 that.getFunctionType()
                 sap.ui.getCore().byId("prot.functions::FunctionsList--fe::table::Functions::LineItem::StandardAction::Create").setVisible(false);
@@ -60,22 +60,22 @@ sap.ui.define(["sap/ui/core/mvc/ControllerExtension", "sap/m/MessageToast", "sap
 
         },
         getFunctionType: function () {
-			var that = this;
+            var that = this;
             var functionTypeArr = []
-			var functions = that.oDataModel.bindList("/FunctionsType");
-                functions.requestContexts().then(function (aContexts) {
-                    aContexts.forEach(function (oContext) {
-                        console.log(oContext.results)
-                        // As we have fetched the data already, we can access "Note" through getProperty
-                        var type = oContext.getProperty("functiontype"); 
-                        functionTypeArr.push(type)
-                            
-                        
-                    });
+            var functions = that.oDataModel.bindList("/FunctionsType");
+            functions.requestContexts().then(function (aContexts) {
+                aContexts.forEach(function (oContext) {
+                   
+                    // As we have fetched the data already, we can access "Note" through getProperty
+                    var type = oContext.getProperty("functiontype");
+                    functionTypeArr.push(type)
+
+
                 });
-                that.oAppModel.setProperty("/functionType", functionTypeArr);
-            
-		},
+            });
+            that.oAppModel.setProperty("/functionType", functionTypeArr);
+
+        },
 
         onCreateBtnPress: function () {
             var oView = this.getView();
@@ -188,27 +188,32 @@ sap.ui.define(["sap/ui/core/mvc/ControllerExtension", "sap/m/MessageToast", "sap
         },
         handleWizardSubmit: function (oEvent) {
             var that = this;
-            var oControl = oEvent.getSource();
-
+            var oContext = that.oDataModel.bindList("/Functions");
+                oContext.create({
+                    "type": that.oAppModel.getProperty("/type"),
+                    "description":that.oAppModel.getProperty("/description") ,
+                    "documentation": "Test File"
+                });
+               
+              
+                
+                oContext.attachCreateCompleted(function () {
+                    that.oDataModel.refresh();
+                    
+                })
+                
+                 
+                this._pDialog.then(function (oDialog) {
+                    oDialog.close();
+                }.bind(this));
+               
+                
+                
+               
            
-
-            var oNote = that.oDataModel.bindProperty("/Functions(ID='1',IsActiveEntity=true)/description");
-                   
-            oNote.requestValue().then(function (sValue) {
-                console.log(sValue);
-                // do something with sValue
-                // Note: We cannot use setValue as oNote is an absolute property binding
-            });
-
-            //that.oDataModel.bindProperty("/Functions(ID='1')/test", "test");
-
-            //console.log();
-            // that.oDataModel.setProperty("/Functions(ID='1',IsActiveEntity=true)/type", "AL");
-
-
-
-            console.log(that.oDataModel);
-
+        },
+        onChooseType: function (oEvent) {
+         this.oAppModel.setProperty("/type", oEvent.getSource().getSelectedKey()); 
         },
         onDialogBackButton: function () {
             this._iSelectedStepIndex = this._oWizard.getSteps().indexOf(this._oSelectedStep);

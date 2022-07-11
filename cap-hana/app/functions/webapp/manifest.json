@@ -124,7 +124,6 @@
             "css": []
         },
         "routing": {
-            "config": {},
             "routes": [
                 {
                     "pattern": ":?query:",
@@ -154,6 +153,7 @@
                                 }
                             },
                             "initialLoad": "Enabled",
+                            "showCounts": true,
                             "controlConfiguration": {
                                 "@com.sap.vocabularies.UI.v1.LineItem": {
                                     "actions": {
@@ -163,6 +163,9 @@
                                             "press": ".extension.prot.functions.ext.controller.ListReportExtController.onCreateBtnPress",
                                             "requiresSelection": false
                                         }
+                                    },
+                                    "tableSettings": {
+                                        "type": "GridTable"
                                     }
                                 }
                             }

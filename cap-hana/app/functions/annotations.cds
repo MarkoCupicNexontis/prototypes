@@ -9,9 +9,31 @@ annotate service.Functions with @(
         {
             $Type : 'UI.DataField',
             Value : description,
+        },
+         {
+            $Type : 'UI.DataField',
+            Value : documentation,
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : allocation_ID,
+        },
+         {
+            $Type : 'UI.DataField',
+            Value : derivation_ID,
+        },
+         {
+            $Type : 'UI.DataField',
+            Value : modelTable_ID,
         }
-    ]
+    ],
+    
 );
+
+
+
+
+
 annotate service.Functions with @(
     UI.FieldGroup #GeneratedGroup1 : {
         $Type : 'UI.FieldGroupType',
@@ -23,6 +45,10 @@ annotate service.Functions with @(
             {
                 $Type : 'UI.DataField',
                 Value : description,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : documentation,
             }
         ],
     },

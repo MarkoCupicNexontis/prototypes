@@ -1,0 +1,582 @@
+{
+  "namespace": "func",
+  "definitions": {
+    "func.Functions": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "@odata.Type": "Edm.String",
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "type": {
+          "@assert.range": true,
+          "@title": "Type",
+          "type": "func.FileType"
+        },
+        "description": {
+          "@title": "Description",
+          "type": "cds.String"
+        },
+        "documentation": {
+          "@title": "Documentation",
+          "type": "cds.LargeString"
+        },
+        "allocation": {
+          "@title": "Alocation",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "func.Allocations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "derivation": {
+          "@title": "Derivation",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "func.Derivations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "modelTable": {
+          "@title": "Model Table",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "func.ModelTables",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "func.FunctionsType": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "@odata.Type": "Edm.String",
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "functiontype": {
+          "type": "cds.String"
+        },
+        "label": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "func.FileType": {
+      "kind": "type",
+      "@assert.range": true,
+      "@title": "Type",
+      "type": "cds.String",
+      "enum": {
+        "Allocation": {
+          "val": "AL"
+        },
+        "Derivation": {
+          "val": "DE"
+        },
+        "ModelTable": {
+          "val": "MT"
+        }
+      }
+    },
+    "func.Allocations": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "@odata.Type": "Edm.String",
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "type": {
+          "@assert.range": true,
+          "@title": "Type",
+          "type": "func.AllocationType"
+        },
+        "description": {
+          "@title": "Description",
+          "@assert.format": "[A-Z,0-9,_]{3}",
+          "type": "cds.String"
+        },
+        "function": {
+          "@mandatory": true,
+          "@title": "Function",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "func.Functions",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "func.AllocationType": {
+      "kind": "type",
+      "@assert.range": true,
+      "@title": "Type",
+      "type": "cds.String",
+      "enum": {
+        "Direct": {
+          "val": "DI"
+        },
+        "Indirect": {
+          "val": "IN"
+        }
+      }
+    },
+    "func.Derivations": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "@odata.Type": "Edm.String",
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "type": {
+          "@assert.range": true,
+          "@title": "Type",
+          "type": "func.DerivationType"
+        },
+        "description": {
+          "@title": "Description",
+          "type": "cds.String"
+        },
+        "function": {
+          "@mandatory": true,
+          "@title": "Function",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "func.Functions",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "func.DerivationType": {
+      "kind": "type",
+      "@assert.range": true,
+      "@title": "Type",
+      "type": "cds.String",
+      "enum": {
+        "Derivation": {
+          "val": "DE"
+        },
+        "TransferStructure": {
+          "val": "TR"
+        }
+      }
+    },
+    "func.ModelTables": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "@odata.Type": "Edm.String",
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "type": {
+          "@assert.range": true,
+          "@title": "Type",
+          "type": "func.ModelTableType"
+        },
+        "description": {
+          "@title": "Description",
+          "type": "cds.String"
+        },
+        "function": {
+          "@mandatory": true,
+          "@title": "Function",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "func.Functions",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "func.ModelTableType": {
+      "kind": "type",
+      "@assert.range": true,
+      "@title": "Type",
+      "type": "cds.String",
+      "enum": {
+        "Internal": {
+          "val": "IN"
+        },
+        "External": {
+          "val": "EX"
+        }
+      }
+    },
+    "FunctionService": {
+      "@source": "srv/service.cds",
+      "kind": "service",
+      "@path": "service/functions"
+    },
+    "FunctionService.Functions": {
+      "kind": "entity",
+      "@odata.draft.enabled": true,
+      "@UI.LineItem": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "type"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "description"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "documentation"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "allocation_ID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "derivation_ID"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "modelTable_ID"
+          }
+        }
+      ],
+      "@UI.FieldGroup#GeneratedGroup1.$Type": "UI.FieldGroupType",
+      "@UI.FieldGroup#GeneratedGroup1.Data": [
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "type"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "description"
+          }
+        },
+        {
+          "$Type": "UI.DataField",
+          "Value": {
+            "=": "documentation"
+          }
+        }
+      ],
+      "@UI.Facets": [
+        {
+          "$Type": "UI.ReferenceFacet",
+          "ID": "GeneratedFacet1",
+          "Label": "General Information",
+          "Target": "@UI.FieldGroup#GeneratedGroup1"
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "func.Functions"
+          ],
+          "as": "functions"
+        }
+      },
+      "elements": {
+        "ID": {
+          "@odata.Type": "Edm.String",
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "type": {
+          "@assert.range": true,
+          "@title": "Type",
+          "type": "func.FileType"
+        },
+        "description": {
+          "@title": "Description",
+          "type": "cds.String"
+        },
+        "documentation": {
+          "@title": "Documentation",
+          "type": "cds.LargeString"
+        },
+        "allocation": {
+          "@title": "Alocation",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "FunctionService.Allocations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "derivation": {
+          "@title": "Derivation",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "FunctionService.Derivations",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "modelTable": {
+          "@title": "Model Table",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "FunctionService.ModelTables",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "FunctionService.Allocations": {
+      "kind": "entity",
+      "@odata.draft.enabled": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "func.Allocations"
+          ],
+          "as": "allocations"
+        }
+      },
+      "elements": {
+        "ID": {
+          "@odata.Type": "Edm.String",
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "type": {
+          "@assert.range": true,
+          "@title": "Type",
+          "type": "func.AllocationType"
+        },
+        "description": {
+          "@title": "Description",
+          "@assert.format": "[A-Z,0-9,_]{3}",
+          "type": "cds.String"
+        },
+        "function": {
+          "@mandatory": true,
+          "@title": "Function",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "FunctionService.Functions",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "FunctionService.Derivations": {
+      "kind": "entity",
+      "@odata.draft.enabled": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "func.Derivations"
+          ],
+          "as": "derivations"
+        }
+      },
+      "elements": {
+        "ID": {
+          "@odata.Type": "Edm.String",
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "type": {
+          "@assert.range": true,
+          "@title": "Type",
+          "type": "func.DerivationType"
+        },
+        "description": {
+          "@title": "Description",
+          "type": "cds.String"
+        },
+        "function": {
+          "@mandatory": true,
+          "@title": "Function",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "FunctionService.Functions",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "FunctionService.ModelTables": {
+      "kind": "entity",
+      "@odata.draft.enabled": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "func.ModelTables"
+          ],
+          "as": "modelTables"
+        }
+      },
+      "elements": {
+        "ID": {
+          "@odata.Type": "Edm.String",
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "type": {
+          "@assert.range": true,
+          "@title": "Type",
+          "type": "func.ModelTableType"
+        },
+        "description": {
+          "@title": "Description",
+          "type": "cds.String"
+        },
+        "function": {
+          "@mandatory": true,
+          "@title": "Function",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "FunctionService.Functions",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "FunctionService.FunctionsType": {
+      "kind": "entity",
+      "@cds.odata.valuelist": true,
+      "@UI.SelectionFields": [
+        {
+          "=": "functiontype"
+        }
+      ],
+      "projection": {
+        "from": {
+          "ref": [
+            "func.FunctionsType"
+          ],
+          "as": "functionsType"
+        }
+      },
+      "elements": {
+        "ID": {
+          "@odata.Type": "Edm.String",
+          "@UI.Hidden": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "functiontype": {
+          "@Common.ValueListWithFixedValues": true,
+          "type": "cds.String"
+        },
+        "label": {
+          "type": "cds.String"
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v2.15.4",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}

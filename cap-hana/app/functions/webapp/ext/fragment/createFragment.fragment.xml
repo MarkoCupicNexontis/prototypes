@@ -39,9 +39,9 @@
 								justifyContent="Center"
 								width="100%">
                                 <Label text="Select type of Function:"/>
-                                	<ComboBox placeholder="Choose function type" class="sapUiTinyMarginBegin"  selectionChange="onChooseRole" items="{/FunctionsType}"
-								value="{appModel>/type}">
-								<core:Item  text="{label}"/>
+                                	<ComboBox placeholder="Choose function type" class="sapUiTinyMarginBegin"  selectionChange="onChooseType" items="{/FunctionsType}"
+								>
+								<core:Item key="{functiontype}" text="{label}"/>
 							</ComboBox>
 						</HBox>
 					</WizardStep>
